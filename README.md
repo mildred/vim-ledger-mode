@@ -16,14 +16,13 @@ normal mode.
 - `<Esc>` escapes the ledger mode back to normal mode
 - `{` and `}` navigates to the previous / next transaction
 - `^` and `$` navigates to the first / last line of the current transaction
-- 'o' opens up a transaction below the current one and goes to ledger insert
-  mode
+- 'O' and 'o' opens up a transaction before / after the current one and goes to
+  ledger insert mode
+- `tt` to toggle the current transaction between the current date and the date
+  of the previous transaction
 
 TODO:
 
-- `O` to open a transaction before the current one
-- `tt` to toggle the current transaction between the current date and the date of
-  the previous transaction
 - `tr` to toggle the reconciled status
 - `<S-Tab>` and `<Tab>` to go to the previous / next field (transaction comment,
   account, amount)
@@ -31,8 +30,6 @@ TODO:
 - `E` goes to the end of the current field
 
 ### Insert Ledger Mode ###
-
-TODO:
 
 - `<Tab>` autocompletes account
 - `<CR>` goes to the next field
