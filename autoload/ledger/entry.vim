@@ -21,6 +21,60 @@ function! s:isintr(l)
   return match(getline(a:l), '^\s') == 0
 endf
 
+function! ledger#entry#number(...)
+  if ! exists('a:1') || a:1 == '.'
+    let l = line('.')
+  else
+    let l = a:1
+  endif
+  let li = 0
+  let num = 0
+  while li <= l
+    if match(getline(li), '^\d') == 0
+      let num = num + 1
+    endif
+    let li = li + 1
+  endwhile
+  return num
+endfunction
+
+function! ledger#entry#account_names(...)
+  if ! exists('a:1') || a:1 == '.'
+    let l = line('.')
+  else
+    let l = a:1
+  endif
+  let last = ledger#nav#entry_line_last(l)
+  let l = ledger#nav#entry_line(l)+1
+  let res = []
+  while l <= last
+    let n = ledger#entry#account_name(l)
+    if n != ""
+      let res += [n]
+    endif
+    let l = l + 1
+  endwhile
+  return res
+endfunction
+
+function! ledger#entry#account_name(...)
+  if ! exists('a:1') || a:1 == '.'
+    let l = line('.')
+  else
+    let l = a:1
+  endif
+  let line = getline(l)
+  let first = match(line, '\S')
+  let last = match(line, '  ', first)
+  if first < 1
+    return ""
+  elseif last == -1
+    return line[first:]
+  else
+    return line[first:last-1]
+  endif
+endfunction
+
 function! ledger#entry#field()
   if ! exists('a:1') || a:1 == '.'
     let l = line('.')
