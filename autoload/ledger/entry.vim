@@ -21,6 +21,24 @@ function! s:isintr(l)
   return match(getline(a:l), '^\s') == 0
 endf
 
+function! ledger#entry#isfirst()
+  if ! exists('a:1') || a:1 == '.'
+    let l = line('.')
+  else
+    let l = a:1
+  endif
+  return s:isfirst(l)
+endf
+
+function! ledger#entry#isintr()
+  if ! exists('a:1') || a:1 == '.'
+    let l = line('.')
+  else
+    let l = a:1
+  endif
+  return s:isintr(l)
+endf
+
 function! ledger#entry#number(...)
   if ! exists('a:1') || a:1 == '.'
     let l = line('.')
